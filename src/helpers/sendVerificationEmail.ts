@@ -12,7 +12,7 @@ export async function sendVerificationEmail(
     console.log("Verification Code:", verifyCode);
 
     const emailData = {
-      sender: { name: 'True Feedback', email: 'YOUR_VERIFIED_EMAIL@gmail.com' },
+      sender: { name: 'True Feedback', email: 'nihalanand469@gmail.com' },
       to: [{ email: email, name: username }],
       subject: 'True Feedback | Verification code',
       htmlContent: `
