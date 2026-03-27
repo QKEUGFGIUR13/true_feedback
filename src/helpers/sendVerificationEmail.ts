@@ -1,6 +1,6 @@
 import { emailClient } from '../lib/resend';
 import { apiResponse } from '@/types/apiResponse';
-import * as brevo from '@getbrevo/brevo';
+const brevo = require('@getbrevo/brevo');
 
 export async function sendVerificationEmail(
   username: string,
@@ -47,14 +47,14 @@ export async function sendVerificationEmail(
         </body>
       </html>
     `;
-    sendSmtpEmail.sender = { name: 'True Feedback', email: 'noreply@truefeedback.com' };
+    sendSmtpEmail.sender = { name: 'True Feedback', email: 'noreply@truefeedback.app' };
 
-    const response = await emailClient.sendTransacEmail(sendSmtpEmail);
-    console.log('Brevo Email Response:', response);
+    await emailClient.sendTransacEmail(sendSmtpEmail);
+    console.log('Brevo Email sent successfully');
 
     return { success: true, message: 'Verification email sent successfully' };
   } catch (emailError: any) {
     console.error("Error sending verification email:", emailError);
-    return { success: false, message: 'Failed to send verification email' };
+    return { success: false, message: emailError?.message || 'Failed to send verification email' };
   }
 }
